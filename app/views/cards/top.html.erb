@@ -5,16 +5,16 @@
 <input type="submit" value="約判定させて〜や">
 <% end %>
 
-<% if @card %>
+<% if @original_card.cards %>
     <h3>your card</h3> 
-   <%= @card.cards %>
+   <%= @original_card.cards %>
 <% end %>
 
 <br>
 <h3>役判定</h3>
-<% if @judge %>
-<%= @judge %>
-<% elsif @card %>
+<% if @error %>
 <%= "役無し.エラー解決してから出直してください" %><br>
 <%= @error %>
+<% elsif @judge %>
+<%= @judge %>
 <% end %>

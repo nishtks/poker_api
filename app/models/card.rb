@@ -1,8 +1,11 @@
 class Card < ApplicationRecord
     #DB設計は      t.string :cards
     def hand_validation
-        errors = [] #エラー内容を格納する箱
-        @card = self.cards
+#        errors = [] #エラー内容を格納する箱
+        #@card = self#なんかこれだと上手く行かない　DB設計に合わせた形でSelfを使うことは可能
+        @card =self.cards
+
+byebug
         @card_array = @card.scan(/\S+/)
         @card_length = @card_array.length
         @card_count = @card_array.group_by(&:itself).length
@@ -38,7 +41,7 @@ class Card < ApplicationRecord
 
         #バリデーションひっかかったやつらを選定
         if @v_message1 or @v_message2
-            error_statement = "" #error格納先を作成
+            error_statement = "" #error内容の格納先を作成
             if @v_message1
             error_statement << @v_message1
             end
@@ -50,18 +53,21 @@ class Card < ApplicationRecord
                             "card": @card,
                             "error": error_statement
                             }
-            errors.push error_element #push method で配列にresult_element追加
+#            errors.push error_element #push method で配列errorsにresult_element追加
             end
 
             @v_message1 = nil #initialize
             @v_message2 = nil #initialize
-            return errors
+            #return error
+            return error_element
+
+
         end #@v_message1 or @v_message2
     end # def validation
 
 
     def hand_judge
-        judges = []
+      #judges = []
         hand_validation #変数を受け継ぐ
         if @suit_count == 1 and ( @s == 4 or @s == 12)
             @j_message = "ストレートフラッシュ"
@@ -99,6 +105,7 @@ class Card < ApplicationRecord
             rank = "9"
             best = "false"
         end #yaku hantei
+        byebug
 
         if @j_message
             judge_statement = @j_message
@@ -107,12 +114,13 @@ class Card < ApplicationRecord
                             "judge": judge_statement,
                             "best": best
                             }
-            judges.push judge_element #push method で配列にjudge_element追加
+#            judges.push judge_element #push method で配列にjudge_element追加
         end #if @j_message
 
         @j_message = nil #initialize
-        ranking = judges.sort_by!{|a| a[:rank]}
-        ranking[0][:best] = "true"
-        return judges
+        # ranking = judges.sort_by!{|a| a[:rank]}
+        # ranking[0][:best] = "true"
+
+        return judge_element
     end #def hand_judge
 end #Card < ApplicationRecord
