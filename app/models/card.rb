@@ -5,7 +5,6 @@ class Card < ApplicationRecord
         #@card = self#なんかこれだと上手く行かない　DB設計に合わせた形でSelfを使うことは可能
         @card =self.cards
 
-byebug
         @card_array = @card.scan(/\S+/)
         @card_length = @card_array.length
         @card_count = @card_array.group_by(&:itself).length
@@ -101,11 +100,10 @@ byebug
             rank = "8"
             best = "false"
         elsif
-            @j_message == "ハイカード"
+            @j_message = "ハイカード"
             rank = "9"
             best = "false"
         end #yaku hantei
-        byebug
 
         if @j_message
             judge_statement = @j_message

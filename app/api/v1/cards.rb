@@ -9,17 +9,18 @@ module V1 #v1>cards
             params do #パラメータの制御
                 requires :cards, type: Array, desc: 'Cards' #desc以降は要らない.なくても動く.
             end
+            response = {}
+            errors = nil
+            judges = nil
 
             errors = []
             judges = []
-
+byebug
             post '/' do  #HTTPメソッドに対応した処理を定義 get,postどっちでも動くからどっちでも良さそう
                 array_cards = params[:cards] #jsonで入ってきたカードたちを格納
                 array_cards.each do |card| #カードを1セットずつ確認する
                     @original_card = Card.new(cards: card)
-                    byebug
                     @error = @original_card.hand_validation #ここではerror_elementが返却される
-                    byebug
                     if @error
                         errors.push @error #push method で配列errorsにerror_element追加
                     elsif
