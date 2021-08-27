@@ -3,11 +3,13 @@ class CardsController < ApplicationController
   end
 
   def submit
-    
     #@original_card = Card.new(cards: params[:content]).cards #ここでDBに設定した形から崩すと上手く行かない
     @original_card = Card.new(cards: params[:content])
 byebug
-    @error = @original_card.hand_validation
+    @original_card.make_array
+    @ng_card_message = @original_card.card_validation
+    @ng_hand_message = @original_card.hand_validation
+    @error = @original_card.all_validation
 byebug
     # エラーがなければ役判定に飛ばす render ではViewファイルを引数として指定する必要がある
     if @error

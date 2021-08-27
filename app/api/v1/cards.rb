@@ -15,12 +15,15 @@ module V1 #v1>cards
 
             errors = []
             judges = []
-byebug
+# byebug
             post '/' do  #HTTPメソッドに対応した処理を定義 get,postどっちでも動くからどっちでも良さそう
                 array_cards = params[:cards] #jsonで入ってきたカードたちを格納
                 array_cards.each do |card| #カードを1セットずつ確認する
                     @original_card = Card.new(cards: card)
-                    @error = @original_card.hand_validation #ここではerror_elementが返却される
+                    @original_card.make_array
+                    @ng_card_message = @original_card.card_validation
+                    @ng_hand_message = @original_card.hand_validation
+                    @error = @original_card.all_validation
                     if @error
                         errors.push @error #push method で配列errorsにerror_element追加
                     elsif

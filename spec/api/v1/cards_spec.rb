@@ -24,7 +24,7 @@ RSpec.describe 'Card' do
                 expect(JSON.parse(response.body)['judge_result'][1]['judge']).to eq "ハイカード"
                 expect(JSON.parse(response.body)['judge_result'][1]['best']).to eq "false"
                 expect(JSON.parse(response.body)['error_result'][0]['card']).to eq "H9 C9 S900 H2 C2"
-                expect(JSON.parse(response.body)['error_result'][0]['error']).to eq "3番目の「S900」は不正なカードです。スートDHCS,数字1〜13の組み合わせで入力してください(例：S1)。"
+                expect(JSON.parse(response.body)['error_result'][0]['error']).to eq "次のカードは不正です。3番目の「S900」。スートDHCS,数字1〜13の組み合わせで入力してください(例：S1)。"
             end
         end #context
         context '正常なデータで強い役が2つあるとき' do
