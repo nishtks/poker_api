@@ -17,38 +17,38 @@ class HandJudgeService
         if @suit_count == 1 and ( @s == 4 or @s == 12)
             @j_message = "ストレートフラッシュ"
             rank = 1
-            best = "false"
+            best = "before judge"
         elsif @num_count == 2 and @num_count_detail.values.max == 4
             @j_message = "フォー・オブ・ア・カインド"
             rank = 2
-            best = "false"
+            best = "before judge"
         elsif @num_count == 2 and @num_count_detail.values.max == 3
             @j_message = "フルハウス"
             rank = 3
-            best = "false"
+            best = "before judge"
         elsif @suit_count == 1
             @j_message = "フラッシュ"
             rank = 4
-            best = "false"
+            best = "before judge"
         elsif @s == 4
             @j_message = "ストレート"
             rank = 5
-            best = "false"
+            best = "before judge"
         elsif @num_count == 3 and @num_count_detail.values.max == 3
             @j_message = "スリー・オブ・ア・カインド"
             rank = 6
-            best = "false"
+            best = "before judge"
         elsif @num_count == 3 and @num_count_detail.values.max == 2
             @j_message = "ツーペア"
             rank = 7
         elsif @num_count == 4 and @num_count_detail.values.max == 2
             @j_message = "ワンペア"
             rank = 8
-            best = "false"
+            best = "before judge"
         elsif
             @j_message = "ハイカード"
             rank = 9
-            best = "false"
+            best = "before judge"
         end #yaku hantei
 
         if @j_message

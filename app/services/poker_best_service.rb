@@ -1,22 +1,21 @@
 # module Cards
-    class PokerBestService
-        attr_accessor :hands
-        def initialize(hands)
-            @hands = hands
-        end
-        def create_best
-            @hands_sortby_rank = @hands.sort_by{|a| a[:rank] }
-            @hands_sortby_rank[0][:best] = "ture"
-            return @hands_sortby_rank
-        end
+
+class PokerBestService
+    attr_accessor :hands
+
+    def initialize(hands)
+        @hands = hands
     end
 
-    #同順1位が未完成
-            # @hands_sortby_rank.each do |i,hand_rank|
-            #     if @hands_sortby_rank[0][:rank] < @hands_sortby_rank[i + 1][:rank]
-            #         @hands_sortby_rank[0][:best] = "true"
-            #     elsif @hands_sortby_rank[0][:rank] = @hands_sortby_rank[i+1][:rank]
-            #         @hands_sortby_rank[0][:best] = "true"
-            #         @hands_sortby_rank[i+1][:best] = "true"
-            #     end
-            # end
+    def create_best
+        @best_score = @hands.map{|hash| hash[:rank]}.min #役強いほど数値(INT)が小さい
+        @hands.each do |hand,i|
+            if hand[:rank] == @best_score
+                hand[:best] = "true"
+            elsif
+                hand[:best] = "false"
+            end
+        end
+        return @hands
+    end
+end
