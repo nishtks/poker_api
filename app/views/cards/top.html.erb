@@ -1,11 +1,11 @@
 <h1>Cards#top</h1>
 
 <%= form_tag("/cards/submit") do %>
-<input type="string" name="content" > <%# contentがParamsで運ばれる　%>
+<input type="string" name="submit_card" > <%# submit_cardがParamsで運ばれる　%>
 <input type="submit" value="約判定させて〜や">
 <% end %>
 
-<% if @original_card.cards %>
+<% if @original_card %>
     <h3>your card</h3> 
    <%= @original_card.cards %>
 <% end %>
